@@ -14,5 +14,10 @@ Router.get('/:id', (req, res, next) => {
     postController.getPost();
 });
 
+Router.post('/', (req, res, next) => {
+    let postController = new PostController(req, res, next);
+    postController.addPost();
+});
+
 
 module.exports = Router;

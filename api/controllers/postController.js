@@ -11,8 +11,9 @@ class PostController extends Controller {
             let posts = await PostModel.findAll();
             this.returnJson(200, posts);
         } catch (error) {
-            console.error(error);
+            this.returnJson(500, error);
         }
+
     }
 
     async getPost() {
@@ -21,6 +22,16 @@ class PostController extends Controller {
             let post = await PostModel.findById(id);
             if (!post) return this.returnJson(204, "No existe");
             this.returnJson(200, post);
+        } catch (error) {
+            this.returnJson(500, error);
+        }
+    }
+
+    async addPost() {
+        let post = this.req.body;
+        try {
+            let postResult = await PostModel.create(post);
+            this.returnJson(200, postResult);
         } catch (error) {
             this.returnJson(500, error);
         }
