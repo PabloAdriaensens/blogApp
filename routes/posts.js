@@ -19,5 +19,10 @@ Router.post('/', (req, res, next) => {
     postController.addPost();
 });
 
+Router.delete('/:id', (req, res, next) => {
+    let postController = new PostController(req, res, next);
+    postController.deletePost();
+});
+
 
 module.exports = Router;

@@ -37,6 +37,18 @@ class PostController extends Controller {
         }
     }
 
+    async deletePost() {
+        let id = this.req.params.id;
+        try {
+            let post = await PostModel.findById(id);
+            if (!post) return this.returnJson(204, "No existe el post");
+            let resultDelete = await post.destroy();
+            if (!resultDelete) return this.returnJson(204, "No existe el post");
+            this.returnJson(200, resultDelete);
+        } catch (error) {
+            this.returnJson(500, error);
+        }
+    }
 
 }
 
