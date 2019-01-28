@@ -24,5 +24,10 @@ Router.delete('/:id', (req, res, next) => {
     postController.deletePost();
 });
 
+Router.delete('/',(req,res,next)=>{
+    let postController = new PostController(req, res, next);
+    postController.deleteAllPost();
+});
+
 
 module.exports = Router;

@@ -50,6 +50,20 @@ class PostController extends Controller {
         }
     }
 
+    async deleteAllPost() {
+        try {
+            let result = await PostModel.destroy({
+                where: {},
+                truncate: true
+            });
+            if (!result) return this.returnJson(204, "No existe el post");
+            this.returnJson(200, result);
+        } catch (error) {
+            this.returnJson(500, error);
+        }
+    }
+
+
 }
 
 module.exports = PostController;
