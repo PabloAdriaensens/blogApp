@@ -56,13 +56,23 @@ class PostController extends Controller {
                 where: {},
                 truncate: true
             });
-            if (!result) return this.returnJson(204, "No existe el post");
             this.returnJson(200, result);
         } catch (error) {
             this.returnJson(500, error);
         }
     }
 
+    async updatePost() {
+        let id = this.req.params.id;
+        let post = this.req.body;
+        try {
+            let result = await PostModel.update(post,{where:{id}});
+            if(!result) return this.returnJson(204, "No existe el post");
+            this.returnJson(200, result);
+        } catch (error) {
+            this.returnJson(500, error);
+        }
+    }
 
 }
 
